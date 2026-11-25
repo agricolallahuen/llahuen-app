@@ -86,7 +86,7 @@ dialog::backdrop{background:#0b1a1199}
 .compare th,.compare td{border-top:1px solid var(--line);padding:10px 8px;text-align:left;vertical-align:top}
 .compare thead th{color:var(--green);border-top:0}
 form{max-width:640px;display:grid;gap:14px}
-label{font-weight:700;font-size:15px;display:grid;gap:6px}
+label[hidden]{display:none}label{font-weight:700;font-size:15px;display:grid;gap:6px}
 input,select,textarea{font:16px Jost,Futura,sans-serif;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);min-height:48px;width:100%}
 textarea{min-height:110px;resize:vertical}
 .row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -244,8 +244,8 @@ footer{padding:24px max(4vw,16px) 30px;color:var(--mute);font-size:14px;border-t
    <div class="row2"><label>Teléfono / WhatsApp<input name="telefono" type="tel" required autocomplete="tel" placeholder="+56 9 ..."></label><label>Región<select name="region" required id="regp"></select></label></div>
    <div class="row2"><label>Comuna o sector<input name="comuna" required></label><label>Variedad<select name="variedad" required id="varp"></select></label></div>
    <div class="row2"><label>Fecha de plantación<input name="fecha" type="date"></label><label>N° de guía o factura<input name="guia"></label></div>
-   <div class="row2"><label>Cantidad de plantas afectada (aprox.)<input name="cantidad" inputmode="numeric"></label>
-   <label>Tipo de situación<select name="motivo" required><option value="">Seleccione…</option><option>Plantas muertas o mal prendimiento</option><option>Problema sanitario (hongos, plagas)</option><option>Calidad de planta al recibir</option><option>Duda de manejo o fertilización</option><option>Producción o calidad de fruta</option><option>Despacho o cantidad recibida</option><option>Otro</option></select></label></div>
+   <div class="row2"><label>Tipo de situación<select name="motivo" required id="motp"><option value="">Seleccione…</option><option>Plantas muertas o mal prendimiento</option><option>Problema sanitario (hongos, plagas)</option><option>Calidad de planta al recibir</option><option>Duda de manejo o fertilización</option><option>Producción o calidad de fruta</option><option>Despacho o cantidad recibida</option><option>Otro</option></select></label>
+   <label id="cantp" hidden>Cantidad de plantas afectadas (aprox.)<input name="cantidad" inputmode="numeric" placeholder="Ej: 2.000"></label></div>
    <label>Describa la situación<textarea name="detalle" required placeholder="Qué observa, desde cuándo, en qué sector, qué manejo ha realizado..."></textarea></label>
    <p class="note" style="margin:0">Las fotos se adjuntan directamente en el chat de WhatsApp que se abrirá al enviar.</p>
    <label class="consent"><input type="checkbox" name="ok" required><span>Autorizo a Agrícola Llahuen a usar estos datos para atender mi caso y contactarme.</span></label>
@@ -362,9 +362,12 @@ document.getElementById("fq").addEventListener("submit",e=>{e.preventDefault();c
  const msg=`*Nueva cotización – App Llahuen*\nNombre: ${d.nombre}\nEmpresa/predio: ${d.empresa||"-"}\nTeléfono: ${d.telefono}\nCorreo: ${d.correo||"-"}\nUbicación: ${d.comuna}, ${d.region}\nVariedades: ${vars}\nCantidad: ${d.cantidad} plantas\nTipo de planta: ${d.tipo}\nPlantación estimada: ${d.fecha||"-"}\nSistema: ${d.sistema}\nComentarios: ${d.comentarios||"-"}`;
  listo(document.getElementById("dq"),a,msg,"Solicitud lista")});
 
+const CON_CANT=["Plantas muertas o mal prendimiento","Problema sanitario (hongos, plagas)","Calidad de planta al recibir"];
+const motp=document.getElementById("motp"),cantp=document.getElementById("cantp");
+motp.addEventListener("change",()=>{const on=CON_CANT.includes(motp.value);cantp.hidden=!on;const i=cantp.querySelector("input");i.required=on;if(!on)i.value=""});
 document.getElementById("fp").addEventListener("submit",e=>{e.preventDefault();const f=e.target;if(!valida(f,document.getElementById("ep")))return;
  const d=Object.fromEntries(new FormData(f));
- const msg=`*Caso de postventa – App Llahuen*\nNombre: ${d.nombre}\nEmpresa/predio: ${d.empresa}\nTeléfono: ${d.telefono}\nUbicación: ${d.comuna}, ${d.region}\nVariedad: ${d.variedad}\nFecha plantación: ${d.fecha||"-"}\nGuía/factura: ${d.guia||"-"}\nPlantas afectadas: ${d.cantidad||"-"}\nSituación: ${d.motivo}\nDetalle: ${d.detalle}`;
+ const msg=`*Caso de postventa – App Llahuen*\nNombre: ${d.nombre}\nEmpresa/predio: ${d.empresa}\nTeléfono: ${d.telefono}\nUbicación: ${d.comuna}, ${d.region}\nVariedad: ${d.variedad}\nFecha plantación: ${d.fecha||"-"}\nGuía/factura: ${d.guia||"-"}\nSituación: ${d.motivo}${d.cantidad?`\nPlantas afectadas: ${d.cantidad}`:""}\nDetalle: ${d.detalle}`;
  listo(document.getElementById("dp"),EQUIPO.postventa,msg,"Mensaje listo")});
 
 document.addEventListener("error",e=>{const i=e.target;if(i.tagName==="IMG"&&i.dataset.g){const w=document.createElement("span");w.innerHTML=fr(i.dataset.g,100);i.replaceWith(w.firstChild)}},true);
