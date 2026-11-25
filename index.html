@@ -31,7 +31,7 @@ h1{font-size:clamp(30px,6vw,46px)}h2{font-size:clamp(24px,4.5vw,32px)}h3{font-si
 a{color:var(--green)}
 header.top{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) max(4vw,14px) 10px;display:flex;align-items:center;justify-content:center}
 header.top img{height:clamp(88px,22vw,120px);width:auto}
-nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--deep);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding-bottom:env(safe-area-inset-bottom)}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--deep);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding-bottom:env(safe-area-inset-bottom)}
 nav.tabs a{color:#cfe6d6;text-decoration:none;font-size:12px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 2px 8px;min-height:60px}
 nav.tabs a svg{width:24px;height:24px}
 nav.tabs a[aria-current=page]{color:#fff;background:#17482c;box-shadow:inset 0 3px 0 var(--red)}
@@ -61,12 +61,17 @@ section.view{display:none}section.view.on{display:block;animation:in .35s ease}
 .filters button{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:500 15px Jost,Futura,sans-serif;cursor:pointer}
 .filters button[aria-pressed=true]{background:var(--deep);border-color:var(--deep);color:#fff}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;text-align:left;font:inherit;color:inherit;padding:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;text-align:left;font:inherit;color:inherit;padding:0}
 .card .pic{background:#ececec;aspect-ratio:4/3;display:grid;place-items:center;overflow:hidden}
 .card .pic img{width:100%;height:100%;object-fit:cover;display:block}.card .pic svg{height:108px;width:auto}
 .card .bd{padding:14px 16px 16px}
 .tag{display:inline-block;font-size:13px;font-weight:800;padding:2px 10px;border-radius:999px;background:light-dark(#e7f2ea,#203a2a);color:var(--green)}
 .tag.dc{background:light-dark(#fde8e8,#3a1d1f);color:var(--red2)}
+.card .acts{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}.card .acts button{flex:1;min-height:44px;border-radius:999px;border:1.5px solid var(--deep);background:var(--card);color:var(--green);font:500 15px Jost,sans-serif;cursor:pointer}.card .acts button.m{background:var(--deep);color:#fff}
+.card .pic{cursor:pointer}
+.mj{scroll-margin-top:150px;margin-top:16px;border:1.5px solid var(--line);border-radius:14px;overflow:hidden}.mj summary{cursor:pointer;list-style:none;padding:14px 16px;background:var(--deep);color:#fff;font:500 17px Jost,sans-serif;text-transform:uppercase;display:flex;justify-content:space-between}.mj summary::after{content:"+";font-size:22px;line-height:1}.mj[open] summary::after{content:"–"}.mj ul{margin:0;padding:12px 18px 6px 34px}.mj li{margin-bottom:8px}.mj .gl{padding:0 16px 14px;display:flex;flex-wrap:wrap;gap:8px}
+.guides{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}.guides a{display:block;padding:14px 16px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--card)}.guides a b{display:block;color:var(--green);font-weight:500}
+.btn.sm{min-height:40px;padding:0 14px;font-size:14px}
 .card p{margin:.4em 0 0;color:var(--mute);font-size:15px}
 .card .kpi{margin-top:10px;font-weight:800;font-size:15px}
 dialog{border:0;padding:0;border-radius:20px;width:min(720px,94vw);max-height:90vh;background:var(--bg);color:var(--ink)}
@@ -182,32 +187,11 @@ footer{padding:24px max(4vw,16px) 30px;color:var(--mute);font-size:14px;border-t
    <button type="button" data-f="corto" aria-pressed="false">Día corto</button>
   </div>
   <div class="grid" id="vgrid"></div>
- </div>
-</section>
-
-<!-- MANEJO -->
-<section class="view" id="manejo">
- <div class="band">
-  <h1>Manejo y plantación</h1>
-  <p style="max-width:62ch">Recomendaciones generales del equipo técnico de Llahuen. Cada variedad tiene ajustes propios en su ficha; ante cualquier duda, nuestro equipo de postventa le acompaña en terreno.</p>
-  <h2 style="margin-top:22px">Antes de plantar</h2>
-  <ol class="steps">
-   <li><b>Elija la combinación de variedades</b>Para tener una curva de producción estable, combine una variedad de día corto (Fronteras, Petaluma, Merced, Camino Real) con una de día neutro como Monterey o Albion.</li>
-   <li><b>Prepare bien el suelo</b>Suelo mullido, sin compactación y con buen drenaje, o sustrato poroso y aireado. Evite enmiendas de fondo con guano o cama de broiler en variedades sensibles (Camarosa, San Andreas).</li>
-   <li><b>Respete la fecha y temperatura</b>Día neutro: plante con suelo sobre 12 °C para evitar exceso de crecimiento vegetativo. Día corto: planta frigoconservada en verano o planta fresca en otoño según la variedad; plantar temprano es clave para la floración.</li>
-   <li><b>Ajuste la densidad</b>Entre 55.000 y 65.000 plantas/ha según la variedad (25 a 29 cm sobre la hilera). Revise la ficha de cada una.</li>
-  </ol>
-  <h2 style="margin-top:28px">Durante el cultivo</h2>
-  <ol class="steps">
-   <li><b>Cuide los primeros 60 días</b>Riego frecuente y atento al establecimiento; es la etapa que define el potencial del cultivo.</li>
-   <li><b>Fertirrigue en dos programas</b>Uno para desarrollo de la planta (coronas) y otro para producción (cuaja y llenado de fruta). Divida en al menos 3 aplicaciones por semana, idealmente con cada riego.</li>
-   <li><b>Controle la conductividad eléctrica</b>En fructificación mantenga la CE en 1,2 dS/m o menos (hasta 1,4 dS/m en Merced) para un buen llenado de fruta.</li>
-   <li><b>Mantenga el equilibrio potasio–calcio</b>Clave para firmeza y calidad de fruta. Calcio foliar continuo en producción en variedades que lo requieren (San Andreas).</li>
-   <li><b>Prevenga oídio, botritis y ácaros</b>Control preventivo de oídio desde fines de primavera, cuando la temperatura supera 25 °C. Evite riegos excesivos y suelos mal drenados (Phytophthora).</li>
-  </ol>
-  <h2 style="margin-top:28px">Comparación rápida</h2>
+  <h2 style="margin-top:34px">Comparación rápida</h2>
   <table class="compare stack" id="cmp"><thead><tr><th>Variedad</th><th>Tipo</th><th>Densidad</th><th>Potencial</th><th>Mercado</th></tr></thead><tbody></tbody></table>
   <p class="note">Potenciales logrados en condiciones óptimas de suelo, clima y manejo agronómico. Fuente: fichas técnicas Llahuen.</p>
+  <h2 style="margin-top:34px">Guías de manejo Llahuen</h2>
+  <div class="guides" id="guides"></div>
  </div>
 </section>
 
@@ -262,7 +246,6 @@ footer{padding:24px max(4vw,16px) 30px;color:var(--mute);font-size:14px;border-t
 <nav class="tabs" aria-label="Secciones">
  <a href="#inicio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3z"/></svg>Inicio</a>
  <a href="#variedades"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 8c5 0 7 3 6.5 6S15 21 12 22c-3-1-6-5-6.5-8S7 8 12 8z"/><path d="M12 8c-2-2-5-2-6-1M12 8c2-2 5-2 6-1M12 8V4"/></svg>Variedades</a>
- <a href="#manejo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21V11M12 11C12 7 9 4 4 4c0 5 3 7 8 7zM12 14c0-3 3-5 8-5 0 4-3 5-8 5z"/></svg>Manejo</a>
  <a href="#cotizar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h4"/></svg>Cotizar</a>
  <a href="#postventa"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M9 10h6"/></svg>Postventa</a>
 </nav>
@@ -285,7 +268,7 @@ const V=[
 {n:"Monterey",img:"https://static.wixstatic.com/media/2b09de_b9d771d25eb04af8b1e5edb032167134~mv2.png/v1/fill/w_800,h_600,al_c,q_85/monterey.jpg",t:"neutro",g:"gR",r:"Fuertemente neutra, de muy buen dulzor y alto potencial.",k:"81 t/ha en 9 meses",d:"62.000 pl/ha (27 cm)",m:"Fresco y agroindustria",pdf:"https://www.llahuen.com/_files/ugd/2b09de_ccbaa507d7f24d4194525ed635772a3b.pdf",
  s:{Planta:"Planta de mayor tamaño, con rápido crecimiento vegetativo inicial. Plantar con suelo sobre 12 °C para evitar exceso de crecimiento que retrase la producción.",Fruto:"Color externo rojo parejo y pulpa roja. Firme, con buena poscosecha y dulzor destacado.",Sanidad:"Buena tolerancia a botritis por lluvia; algo susceptible a oídio. Sensible a trips y ácaros.",Manejo:"Aumentar nitrógeno al inicio en planta fresca. En producción requiere 25–30% más fertilización (N-P-K-Ca-Mg) que Albion para mantener calibre."}},
 {n:"Portola",img:"https://static.wixstatic.com/media/97db73_581b0748129f4c3bb264d082ac8f431d~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/portola.jpg",t:"neutro",g:"gL",r:"Nueva en Chile: el mayor potencial productivo entre las de día neutro.",k:"1.800 g/planta (115 t/ha)",d:"64.000 pl/ha (26 cm)",m:"Agroindustria y fresco temprano",pdf:"https://www.llahuen.com/_files/ugd/2b09de_bb9ed1c9ec2b414e81b3a7a4915771a4.pdf",
- s:{Planta:"Planta más pequeña, con abundante floración inicial y periodo vegetativo corto.",Fruto:"Piel rojo claro, pulpa más clara y aspecto brillante. Firme, con buena poscosecha.",Sanidad:"Sensible a Phytophthora: evitar riegos excesivos y suelos con mal drenaje.",Plantación:"Plantar temprano en primavera para lograr altos rendimientos."}},
+ s:{Planta:"Planta más pequeña, con abundante floración inicial y periodo vegetativo corto.",Fruto:"Piel rojo claro, pulpa más clara y aspecto brillante. Firme, con buena poscosecha.",Sanidad:"Sensible a Phytophthora: evitar riegos excesivos y suelos con mal drenaje.",Plantación:"Plantar temprano en primavera para lograr altos rendimientos.",Manejo:"Evitar riegos excesivos y suelos con mal drenaje por su sensibilidad a Phytophthora."}},
 {n:"San Andreas",img:"https://static.wixstatic.com/media/97db73_a914ee7755ad461090b2f016a56e54ce~mv2.jpg/v1/fill/w_800,h_600,al_c,q_85/san-andreas.jpg",t:"neutro",g:"gR",r:"La de fruto más grande y uniforme, y la más tolerante a enfermedades.",k:"78 t/ha en 9 meses",d:"62.000 pl/ha (27 cm)",m:"Fresco y congelado",pdf:"https://www.llahuen.com/_files/ugd/2b09de_da8de41319e243de95621a9922ade42d.pdf",
  s:{Planta:"Tamaño intermedio, con rápido crecimiento vegetativo inicial. Moderadamente neutra, con peaks de producción más marcados que Albion.",Fruto:"El más grande y uniforme. Rojo parejo por fuera, pulpa más clara. Firmeza adecuada en otoño-primavera.",Sanidad:"La más resistente, especialmente a oídio, con mejor tolerancia al complejo fungoso.",Manejo:"Preferir nitrógeno nítrico sobre amoniacal; evitar enmiendas con guano o cama de broiler; calcio foliar continuo en producción; ajustar riego y fertilización en meses cálidos. Apta para suelo y semi-hidroponía."}},
 {n:"Cabrillo",img:"https://static.wixstatic.com/media/2b09de_87ad89d6a8e3494da3e33f0639ac9a93~mv2.png/v1/fill/w_800,h_600,al_c,q_85/cabrillo.jpg",t:"neutro",g:"gL",r:"Producción muy estable toda la temporada, fruto brillante y firme.",k:"Curva estable, similar a Albion",d:"Según ficha técnica",m:"Fresco",pdf:"https://www.llahuen.com/_files/ugd/2b09de_52ae176098ae40c0a03b64b5808d1276.pdf",
@@ -303,6 +286,7 @@ const V=[
 {n:"Petaluma",img:"v-generica.jpg",t:"corto",g:"gL",r:"Precoz como Fronteras, buena cuaja inicial incluso con frío.",k:"Potencial para producción precoz",d:"Según ficha técnica",m:"Fresco temprano",pdf:"https://www.llahuen.com/_files/ugd/2b09de_afc8d5502950450fb9447585575fc852.pdf",
  s:{Planta:"Tamaño intermedio, buen vigor inicial, raíces profundas.",Fruto:"Calibres uniformes, rojo externo, firmeza adecuada (cuidar equilibrio K-Ca), buena poscosecha. Pedúnculos largos.",Sanidad:"Tolerancia intermedia a oídio: control preventivo desde fines de primavera.",Plantación:"Verano con planta frigoconservada u otoño con planta fresca, siempre temprano.",Manejo:"El momento de riego es crítico por su precocidad. CE ≤ 1,2 dS/m. Combinar con Monterey o Albion."}}
 ];
+const GUIAS=[["Pauta de manejo de plantación","https://www.llahuen.com/_files/ugd/97db73_254ce50da9b34a9cb64060c522bc3440.pdf","Pauta Llahuen para el manejo de la plantación"],["Guía: establecimiento y post plantación","https://www.llahuen.com/_files/ugd/97db73_d4b0a5e9838d4b358efa9d7857dda15a.pdf","Guía cultivo de la frutilla"],["Cultivo de frutilla: establecimiento","https://www.llahuen.com/_files/ugd/2b09de_503bedea68e04cd4839687201acd0b0c.pdf","Establecimiento y post plantación"],["Boletín INIA N° 252","https://www.llahuen.com/_files/ugd/97db73_85211514cb114e95ab7b8e75bebe30d7.pdf","Frutillas: consideraciones productivas y manejo"],["Videos técnicos Llahuen","https://www.youtube.com/channel/UC8PZx8JFpHiveL6Ya65Wj2w","Plantación, poda, lavado de plantas y más"]];
 const VALS=["Compromiso con la calidad","Apoyo técnico permanente a nuestros clientes","Rigurosidad en cada proceso","Honestidad, responsabilidad y cumplimiento de compromisos"];
 const PLACES=[["Agrícola Llahuen","Parcela 26, Camino La Victoria, Huelquén, Paine, Región Metropolitana. A 50 km de Santiago, con modernas cámaras de frío."]];
 
@@ -316,24 +300,30 @@ document.getElementById("places").innerHTML=PLACES.map(p=>`<div class="place"><b
 
 let filtro="todas";
 const grid=document.getElementById("vgrid");
-const renderGrid=()=>{grid.innerHTML=V.map((v,i)=>({v,i})).filter(o=>filtro==="todas"||o.v.t===filtro).map(({v,i})=>`<button type="button" class="card" data-i="${i}"><div class="pic">${foto(v)}</div><div class="bd">${tipo(v.t)}<h3 style="margin:.35em 0 0">${esc(v.n)}</h3><p>${esc(v.r)}</p><div class="kpi">${esc(v.k)}</div></div></button>`).join("")};
+const renderGrid=()=>{grid.innerHTML=V.map((v,i)=>({v,i})).filter(o=>filtro==="todas"||o.v.t===filtro).map(({v,i})=>`<article class="card"><div class="pic" data-i="${i}">${foto(v)}</div><div class="bd">${tipo(v.t)}<h3 style="margin:.35em 0 0">${esc(v.n)}</h3><p>${esc(v.r)}</p><div class="kpi">${esc(v.k)}</div><div class="acts"><button type="button" data-i="${i}">Ficha técnica</button><button type="button" class="m" data-i="${i}" data-m="1">Ver manejo</button></div></div></article>`).join("")};
 renderGrid();
 document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{filtro=b.dataset.f;document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",x===b));renderGrid()}));
 
 const dlg=document.getElementById("dlg"),dbody=document.getElementById("dbody");
-const abrir=i=>{const v=V[i];
- const rows=[["Tipo",v.t==="neutro"?"Día neutro":"Día corto"],["Potencial",v.k],["Densidad",v.d],["Mercado",v.m],...Object.entries(v.s)];
+const MJ_TIPO={neutro:["Variedad de día neutro: baja respuesta al fotoperiodo; necesita suelo sobre 12 °C para formar yemas florales.","Producción y calibre más homogéneos en la temporada; alternativa para producción fuera de temporada en túnel y microtúnel."],corto:["Variedad de día corto: necesita menos de 14 horas de luz para inducir yemas florales.","Generalmente produce en dos periodos por temporada."]};
+const abrir=(i,verManejo)=>{const v=V[i];
+ const ficha=Object.entries(v.s).filter(([k])=>k!=="Manejo"&&k!=="Plantación");
+ const rows=[["Tipo",v.t==="neutro"?"Día neutro":"Día corto"],["Potencial",v.k],["Densidad",v.d],["Mercado",v.m],...ficha];
+ const mj=[...(v.s["Plantación"]?["Plantación: "+v.s["Plantación"]]:[]),...(v.s["Manejo"]?["Manejo: "+v.s["Manejo"]]:[]),"Densidad recomendada: "+v.d,...MJ_TIPO[v.t]];
  dbody.innerHTML=`<div class="sheet-h">${foto(v)}<div>${tipo(v.t)}<h2 id="dt" style="margin:.2em 0 0">${esc(v.n)}</h2><div class="note">${esc(v.r)}</div></div><button class="close" type="button" aria-label="Cerrar">×</button></div>
  <div style="padding:6px 20px 22px"><table class="spec">${rows.map(r=>`<tr><th>${esc(r[0])}</th><td>${esc(r[1])}</td></tr>`).join("")}</table>
  <p class="note">Resultados obtenidos en condiciones edafoclimáticas y de manejo óptimas.</p>
+ <details class="mj" id="mj"${verManejo?" open":""}><summary>Manejo y plantación</summary><ul>${mj.map(x=>`<li>${esc(x)}</li>`).join("")}</ul><div class="gl">${GUIAS.slice(0,2).map(g=>`<a class="btn green sm" href="${esc(g[1])}" target="_blank" rel="noopener">${esc(g[0])}</a>`).join("")}</div></details>
  <div class="btns"><a class="btn red" href="#cotizar" data-cot="${esc(v.n)}">Cotizar ${esc(v.n)}</a>${v.pdf?`<a class="btn green" href="${esc(v.pdf)}" target="_blank" rel="noopener">Ficha técnica PDF</a>`:""}</div></div>`;
  dbody.querySelector(".close").addEventListener("click",()=>dlg.close());
  dbody.querySelector("[data-cot]").addEventListener("click",e=>{dlg.close();const c=document.querySelector(`#chq input[value="${CSS.escape(e.currentTarget.dataset.cot)}"]`);if(c)c.checked=true});
  try{dlg.showModal()}catch(e){dlg.setAttribute("open","")}
+ if(verManejo)setTimeout(()=>document.getElementById("mj").scrollIntoView({block:"start"}),60);
 };
-grid.addEventListener("click",e=>{const c=e.target.closest(".card");if(c)abrir(+c.dataset.i)});
+grid.addEventListener("click",e=>{const c=e.target.closest("[data-i]");if(c)abrir(+c.dataset.i,!!c.dataset.m)});
 dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close()});
 
+document.getElementById("guides").innerHTML=GUIAS.map(g=>`<a href="${esc(g[1])}" target="_blank" rel="noopener"><b>${esc(g[0])}</b>${esc(g[2])}</a>`).join("");
 document.querySelector("#cmp tbody").innerHTML=V.map(v=>`<tr><td><b>${esc(v.n)}</b></td><td>${v.t==="neutro"?"Día neutro":"Día corto"}</td><td>${esc(v.d)}</td><td>${esc(v.k)}</td><td>${esc(v.m)}</td></tr>`).join("");
 
 const regOpts='<option value="">Seleccione…</option>'+REGIONES.map(r=>`<option>${esc(r[0])}</option>`).join("");
@@ -372,7 +362,7 @@ document.getElementById("fp").addEventListener("submit",e=>{e.preventDefault();c
 
 document.addEventListener("error",e=>{const i=e.target;if(i.tagName==="IMG"&&i.dataset.g){const w=document.createElement("span");w.innerHTML=fr(i.dataset.g,100);i.replaceWith(w.firstChild)}},true);
 /* ---------- navegación ---------- */
-const VIEWS=["inicio","variedades","manejo","cotizar","postventa"];
+const VIEWS=["inicio","variedades","cotizar","postventa"];
 const go=()=>{const h=location.hash.slice(1);const v=VIEWS.includes(h)?h:"inicio";
  document.querySelectorAll("section.view").forEach(s=>s.classList.toggle("on",s.id===v));
  document.querySelectorAll("nav.tabs a").forEach(a=>{if(a.getAttribute("href")==="#"+v)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
